@@ -3,9 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "invariant": "^2.2.4",
+    "lodash": "^4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-reconciler": "^0.20.4",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-flowtype": "^3.10.3",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsdoc": "^4.1.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
   },
   "scripts": {
     "start": "react-scripts start",

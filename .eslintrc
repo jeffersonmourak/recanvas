@@ -1,0 +1,75 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "plugins": [
+        "jsdoc",
+        "flowtype"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "globals": {
+        "jsPDF": true
+    },
+    "settings": {
+        "jsdoc": {
+            "tagNamePreference": {
+                "return": "returns"
+            },
+            "additionalTagNames": {
+                "customTags": [
+                    "subtitle",
+                    "methodOf",
+                    "restrict",
+                    "usage"
+                ]
+            }
+        }
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-indent": [1, "space", 4],
+        "react/jsx-indent-props": [1, "space", 4],
+        "no-param-reassign": 0,
+        "no-console": 0,
+        "class-methods-use-this": 0,
+        "react/forbid-prop-types": 0,
+        "no-restricted-globals": 0,
+        "jsdoc/check-param-names": "error",
+        "jsdoc/check-tag-names": "error",
+        "jsdoc/check-types": "error",
+        "jsdoc/newline-after-description": "error",
+        "jsdoc/require-description-complete-sentence": "error",
+        "jsdoc/require-param-name": "error",
+        "jsdoc/require-param-type": "error",
+        "jsdoc/require-returns-type": "error",
+        "jsdoc/valid-types": "error",
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": true,
+                "ClassDeclaration": true,
+                "ArrowFunctionExpression": true,
+                "FunctionExpression": true
+            }
+        }]
+    },
+    "overrides": [
+        {
+            "files": ["tests/**/*.spec.js"],
+            "rules": {
+                "no-undef": 0
+            }
+        }
+    ]
+}
