@@ -17,7 +17,7 @@ const createTextNode = (textValue : Number | String) => ReactApeComponent.create
 /**
  * Paint.
  */
-const paint = (instance : Constants.Instance) => {
+const paint = (parent: Constants.Instance | null, instance : Constants.Instance) => {
     const textTypes = ['number', 'string'];
 
     const context = getCanvasContext();
@@ -28,11 +28,11 @@ const paint = (instance : Constants.Instance) => {
 
     switch (instance.type) {
     case 'view': {
-        view(context, instance.props);
+        view(context, parent, instance);
         break;
     }
     case 'text': {
-        text(context, instance.props);
+        text(context, parent, instance);
         break;
     }
     default:
@@ -40,7 +40,7 @@ const paint = (instance : Constants.Instance) => {
     }
 
     if (instance.children) {
-        instance.children.forEach(child => paint(child));
+        instance.children.forEach(child => paint(instance, child));
     }
 };
 
@@ -51,7 +51,7 @@ const renderTree = (instance : Constants.Instance) => {
     if (isRootInstance(instance)) {
         instance = buildTree(instance);
 
-        paint(instance);
+        paint(null, instance);
     }
 };
 

@@ -21,7 +21,7 @@ class App extends Component {
             }));
         };
 
-        setInterval(onClickHandler, 5000);
+        setInterval(onClickHandler, 100);
     }
 
     /**
@@ -31,8 +31,24 @@ class App extends Component {
         const { count } = this.state;
 
         return (
-            <view name="red" style={{ top: 0, left: 0, backgroundColor: '#ff0000' }}>
-                <view name="green" style={{ backgroundColor: '#00ff00' }}>{count}</view>
+            <view
+                name="red"
+                style={{
+                    height: 200,
+                    backgroundColor: '#ff0000',
+                }}
+            >
+                <view
+                    name="green"
+                    style={{
+                        backgroundColor: '#00ff00',
+                        top: 0,
+                        left: 10,
+                        height: 40,
+                    }}
+                >
+                    {count}
+                </view>
             </view>
         );
     }
