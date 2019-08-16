@@ -70,9 +70,11 @@ const ReactApeComponent = {
 
         Object.assign(instance, { ...parsedProps, props: parsedProps });
 
+        const newInstance = buildTree(instance);
+
         dispatch(actions.cache.setInstance({
-            props: instance.props,
-            instance,
+            props: newInstance.props,
+            instance: newInstance,
         }));
     },
 };

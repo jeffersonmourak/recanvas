@@ -21,7 +21,14 @@ class App extends Component {
             }));
         };
 
-        setInterval(onClickHandler, 100);
+        setTimeout(onClickHandler, 1000);
+
+        /** On click handler. */
+        const onHoverHandler = () => {
+            console.log('clicked');
+        };
+
+        this.onHoverHandler = onHoverHandler;
     }
 
     /**
@@ -33,6 +40,7 @@ class App extends Component {
         return (
             <view
                 name="red"
+                onClick={this.onHoverHandler}
                 style={{
                     height: 200,
                     backgroundColor: '#ff0000',

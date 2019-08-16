@@ -6,6 +6,7 @@ import * as NoHydration from './HostConfigWithNoHydration';
 import { actions, dispatch } from '../context';
 import ReactApeFiberComponent from './ReactApeFiberComponent';
 import { renderTree } from '../canvasRenderer';
+import { mouseEvents } from '../events';
 
 import { getCanvasContext, buildTree } from '../utils';
 
@@ -126,7 +127,7 @@ const ApeReconciler = createReconciler({
      * Prepare for commit.
      */
     prepareForCommit(): void {
-        console.log('Prepare for commit');
+        // console.log('Prepare for commit');
         // Noop
     },
 
@@ -241,7 +242,7 @@ const ApeReconciler = createReconciler({
         newProps: Constants.Instance,
         internalInstanceHandle: Object,
     ): void {
-        getCanvasContext().clearRect(0, 0, 200, 200);
+        getCanvasContext().clearRect(0, 0, 1000, 1000);
         renderTree(instance);
         updateProperties(
             instance,
@@ -361,6 +362,10 @@ const ReactApe = {
      * Render.
      */
     render(element: React.Element<any>, container: HTMLElement, callback: ?Function) {
+        document.body.addEventListener('mousemove', mouseEvents);
+        document.body.addEventListener('mousedown', mouseEvents);
+        document.body.addEventListener('mouseup', mouseEvents);
+
         return renderSubtreeIntoContainer(element, container, callback);
     },
 
@@ -368,7 +373,9 @@ const ReactApe = {
      * Unmount component at node.
      */
     unmountComponentAtNode() {
-        // NOOP.
+        document.body.removeEventListener('mousemove', mouseEvents);
+        document.body.removeEventListener('mousedown', mouseEvents);
+        document.body.removeEventListener('mouseup', mouseEvents);
     },
 };
 

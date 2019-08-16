@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-utils": "^1.2.21",
     "invariant": "^2.2.4",
     "lodash": "^4.17.15",
     "react": "^16.8.6",

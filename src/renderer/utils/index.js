@@ -93,6 +93,45 @@ const buildTree = (instance: Constants.Instance) => {
     return instance;
 };
 
+/**
+ * Has Children.
+ */
+const hasChildren = (
+    instance: Constants.Instance,
+    childrenId: String,
+) => instance.children.reduce((result, child) => {
+    if (result) {
+        return result;
+    }
+    if (child.apeId === childrenId) {
+        return true;
+    }
+    if (child.children) {
+        return hasChildren(child, childrenId);
+    }
+
+    return false;
+}, false);
+
+/**
+ * Get parent.
+ */
+const getParent = (instance : Constants.Instance) => {
+    const { instances } = state().cache;
+
+    return Object.values(instances).reduce((result, cacheInstance) => {
+        if (result !== null) {
+            return result;
+        }
+
+        if (hasChildren(cacheInstance, instance.apeId)) {
+            return cacheInstance;
+        }
+
+        return null;
+    }, null);
+};
+
 export {
     isNumber,
     isString,
@@ -102,4 +141,5 @@ export {
     buildTree,
     isRootInstance,
     matchObjects,
+    getParent,
 };
