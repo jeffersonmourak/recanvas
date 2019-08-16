@@ -13,6 +13,7 @@ export type Props = Object;
 const enums = {
     canvas: {
         setContext: 'CANVAS_SET_CONTEXT',
+        setSizes: 'CANVAS_SET_SIZE',
     },
     cache: {
         setInstance: 'CACHE_SET',

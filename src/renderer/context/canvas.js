@@ -10,6 +10,11 @@ const reducer = (state = { }, action : Constants.Action) => {
             ...state,
             context: action.payload,
         };
+    case Constants.enums.canvas.setSizes:
+        return {
+            ...state,
+            size: action.payload,
+        };
     default:
         return state;
     }
@@ -23,4 +28,17 @@ const setContext = (payload: Object) => ({
     payload,
 });
 
-export { reducer, setContext };
+/**
+ * Set context action.
+ */
+const setCanvasSize = (payload: Object) => ({
+    type: Constants.enums.canvas.setSizes,
+    payload,
+});
+
+
+export {
+    reducer,
+    setContext,
+    setCanvasSize,
+};

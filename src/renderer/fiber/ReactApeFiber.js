@@ -1,5 +1,6 @@
 import * as React from 'react';
 import createReconciler from 'react-reconciler';
+import { throttle } from 'lodash';
 
 import * as NoPersistence from './HostConfigWithNoPersistence';
 import * as NoHydration from './HostConfigWithNoHydration';
@@ -8,7 +9,8 @@ import ReactApeFiberComponent from './ReactApeFiberComponent';
 import { renderTree } from '../canvasRenderer';
 import { mouseEvents } from '../events';
 
-import { getCanvasContext, buildTree } from '../utils';
+import { getCanvasContext, buildTree, getRootInstance } from '../utils';
+import { configureCanvas } from '../styling';
 
 import * as Constants from '../constants';
 
@@ -356,15 +358,24 @@ function renderSubtreeIntoContainer(
     ApeReconciler.updateContainer(parentComponent, internalContainerStructure, null, callback);
 }
 
+let partialConfigCanvas = null;
 
 const ReactApe = {
     /**
      * Render.
      */
     render(element: React.Element<any>, container: HTMLElement, callback: ?Function) {
+        configureCanvas(container);
+
+        partialConfigCanvas = throttle(() => {
+            configureCanvas(container);
+            renderTree(getRootInstance());
+        }, 200);
+
         document.body.addEventListener('mousemove', mouseEvents);
         document.body.addEventListener('mousedown', mouseEvents);
         document.body.addEventListener('mouseup', mouseEvents);
+        window.addEventListener('resize', partialConfigCanvas);
 
         return renderSubtreeIntoContainer(element, container, callback);
     },
@@ -376,6 +387,7 @@ const ReactApe = {
         document.body.removeEventListener('mousemove', mouseEvents);
         document.body.removeEventListener('mousedown', mouseEvents);
         document.body.removeEventListener('mouseup', mouseEvents);
+        window.removeEventListener('resize', partialConfigCanvas);
     },
 };
 

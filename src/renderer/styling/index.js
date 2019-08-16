@@ -1,7 +1,8 @@
 import { omit } from 'lodash';
 import ReactApeComponent from '../fiber/ReactApeFiberComponent';
 import * as Constants from '../constants';
-import { state } from '../context';
+import { state, actions, dispatch } from '../context';
+
 /**
  * Create text node.
  */
@@ -83,8 +84,41 @@ const lookForward = (
     return style;
 };
 
+/**
+ * Convert vh to pixel.
+ */
+const vh = (v) => {
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    return (v * h) / 100;
+};
+
+/**
+ * Convert vw to pixel.
+ */
+const vw = (v) => {
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    return (v * w) / 100;
+};
+
+/**
+ * Configure canvas.
+ */
+const configureCanvas = (element: HTMLElement) => {
+    const width = vw(100);
+    const height = vh(100) - 3;
+
+    element.width = width;
+    element.height = height;
+
+    dispatch(actions.canvas.setCanvasSize({
+        width,
+        height,
+    }));
+};
+
 export {
     lookForward,
     lookBackwards,
     updateGreater,
+    configureCanvas,
 };

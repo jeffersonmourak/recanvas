@@ -57,6 +57,22 @@ const getCacheInstance = (props: Constants.Props) => {
 };
 
 /**
+ * Get Root instance.
+ */
+const getRootInstance = () => {
+    const { instances, root: rootId } = state().cache;
+    const instance = Object
+        .values(instances)
+        .filter(_instance => _instance.apeId === rootId);
+
+    if (!instance.length === 0) {
+        return false;
+    }
+
+    return instance[0];
+};
+
+/**
  * Get cache instance.
  */
 const isRootInstance = (instance: Constants.Instance) => {
@@ -142,4 +158,5 @@ export {
     isRootInstance,
     matchObjects,
     getParent,
+    getRootInstance,
 };
