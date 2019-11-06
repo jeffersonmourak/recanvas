@@ -28,14 +28,21 @@ const actions = {
  * State getter.
  */
 const state = () => rootContext.getState();
+
 /**
  * Dispatch.
  */
 const dispatch = (action: Constants.Action) => rootContext.dispatch(action);
+
+/**
+ * Subscribe.
+ */
+const subscribe = (listener: Function) => rootContext.subscribe(listener);
 
 export {
     rootContext as default,
     actions,
     state,
     dispatch,
+    subscribe,
 };

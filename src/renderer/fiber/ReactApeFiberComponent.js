@@ -2,7 +2,7 @@
  * @flow
  */
 
-import { isArray } from 'lodash';
+import { isArray, isUndefined } from 'lodash';
 import { generateUID, getCacheInstance, buildTree } from '../utils';
 import { actions, dispatch } from '../context';
 import * as Constants from '../constants';
@@ -60,7 +60,7 @@ const ReactApeComponent = {
         const cache = getCacheInstance(props);
         const parsedProps = { ...newProps };
 
-        if (!isArray(newProps.children)) {
+        if (!isArray(newProps.children) && !isUndefined(newProps.children)) {
             parsedProps.children = [parsedProps.children];
         }
 

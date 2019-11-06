@@ -1,4 +1,4 @@
-import { omit } from 'lodash';
+import { omit, isUndefined } from 'lodash';
 import ReactApeComponent from '../fiber/ReactApeFiberComponent';
 import * as Constants from '../constants';
 import { state, actions, dispatch } from '../context';
@@ -71,15 +71,18 @@ const lookForward = (
     const textTypes = ['number', 'string'];
     let style = {};
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const child of children) {
-        style = updateGreater(getAllNumberedStyles(child.style), style);
-        if (textTypes.includes(typeof child) && !style.width) {
-            style.width = measureText(context, parent, createTextNode(child));
-        } else if (child.children) {
-            style = updateGreater(lookForward(context, parent, child.children), style);
+    if (!isUndefined(children)) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const child of children) {
+            style = updateGreater(getAllNumberedStyles(child.style), style);
+            if (textTypes.includes(typeof child) && !style.width) {
+                style.width = measureText(context, parent, createTextNode(child));
+            } else if (child.children) {
+                style = updateGreater(lookForward(context, parent, child.children), style);
+            }
         }
     }
+
 
     return style;
 };

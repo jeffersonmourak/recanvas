@@ -94,17 +94,20 @@ const getCanvasContext = () => {
  * Build Tree.
  */
 const buildTree = (instance: Constants.Instance) => {
-    if (!isArray(instance.children)) {
+    if (!isArray(instance.children) && !isUndefined(instance.children)) {
         instance.children = [instance.children];
     }
 
-    instance.children = instance.children.map((child) => {
-        if (React.isValidElement(child)) {
-            return buildTree(getCacheInstance(child.props));
-        }
+    if (!isUndefined(instance.children)) {
+        instance.children = instance.children.map((child) => {
+            if (React.isValidElement(child)) {
+                return buildTree(getCacheInstance(child.props));
+            }
 
-        return child;
-    });
+            return child;
+        });
+    }
+
 
     return instance;
 };
@@ -140,7 +143,7 @@ const getParent = (instance : Constants.Instance) => {
             return result;
         }
 
-        if (hasChildren(cacheInstance, instance.apeId)) {
+        if ((!isUndefined(cacheInstance.children)) && hasChildren(cacheInstance, instance.apeId)) {
             return cacheInstance;
         }
 

@@ -205,7 +205,7 @@ const ApeReconciler = createReconciler({
         child: Constants.Instance,
     ): void {
         console.log('APPEND TO CONT ->>>> ', child);
-        getCanvasContext().clearRect(0, 0, 200, 200);
+        getCanvasContext().clearRect(0, 0, 1000, 1000);
 
         dispatch(actions.cache.setRoot(child.apeId));
 

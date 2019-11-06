@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-
+import Grid from './components/Grid';
 /**
  * App Component.
  */
@@ -15,17 +15,12 @@ class App extends Component {
         };
 
         /** On click handler. */
-        const onClickHandler = () => {
+        const onHoverHandler = () => {
             this.setState(state => ({
                 count: state.count + 1,
             }));
-        };
 
-        setTimeout(onClickHandler, 1000);
-
-        /** On click handler. */
-        const onHoverHandler = () => {
-            console.log('clicked');
+            console.log(window.getSize());
         };
 
         this.onHoverHandler = onHoverHandler;
@@ -38,26 +33,7 @@ class App extends Component {
         const { count } = this.state;
 
         return (
-            <view
-                name="red"
-                onClick={this.onHoverHandler}
-                style={{
-                    height: 200,
-                    backgroundColor: '#ff0000',
-                }}
-            >
-                <view
-                    name="green"
-                    style={{
-                        backgroundColor: '#00ff00',
-                        top: 0,
-                        left: 10,
-                        height: 40,
-                    }}
-                >
-                    {count}
-                </view>
-            </view>
+            <Grid />
         );
     }
 }
